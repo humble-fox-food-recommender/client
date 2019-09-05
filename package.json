@@ -1,0 +1,19 @@
+{
+  "name": "food-recommender-client-side",
+  "version": "1.0.0",
+  "description": "Client side of food-recommender",
+  "main": "index.js",
+  "scripts": {
+    "test": "live-server --host=localhost"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humble-fox-food-recommender/client.git"
+  },
+  "author": "Tigor, Andreas, Zaki, Frans",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/humble-fox-food-recommender/client/issues"
+  },
+  "homepage": "https://github.com/humble-fox-food-recommender/client#readme"
+}
