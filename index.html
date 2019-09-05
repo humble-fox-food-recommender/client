@@ -5,143 +5,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Food Recommender</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
 </head>
 
 <body>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#">Hidden brand</a>
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
     </nav>
 
-    <div class="container-fluid">
+    <section class="container">
         <div class="row">
+            <div class="card col-sm-3" style="width: 22rem;">
+                <img src="https://i.imgur.com/4d97aAb.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open
+                        Modal</button>
+                </div>
+            </div>
+            <div class="card col-sm-3" style="width: 22rem;">
+                <img src="https://i.imgur.com/4d97aAb.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open
+                        Modal</button>
+                </div>
+            </div>
+            <div class="card col-sm-3" style="width: 22rem;">
+                <img src="https://i.imgur.com/4d97aAb.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's
+                        content.</p>
+                </div>
+                <div class="card-body">
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open
+                        Modal</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
-                <img src="http://i.imgur.com/PUeaHfC.png" alt="" />
-                <div class="portfolio_images_overlay text-center">
-                    <h6 class="clrd-font">Italian Source Mushroom</h6>
-                    <p class="clrd-font product_price"> <i class="fa fa-usd clrd-font" aria-hidden="true"></i> 12</p>
-                    <a href="#" class="btn btn-primary">Click here</a>
-                </div>
-                <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/PUeaHfC.png">
-                    <div class="zoom"></div>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
-                <img src="http://i.imgur.com/uX3g4Nl.png" alt="" />
-                <div class="portfolio_images_overlay text-center">
-                    <h6 class="clrd-font">Italian Source Mushroom</h6>
-                    <p class="clrd-font product_price"> <i class="fa fa-usd clrd-font" aria-hidden="true"></i> 12</p>
-                    <a href="#" class="btn btn-primary">Click here</a>
-                </div>
-                <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/PUeaHfC.png">
-                    <div class="zoom"></div>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
-                <img src="http://i.imgur.com/8cOtAS9.png" alt="" />
-                <div class="portfolio_images_overlay text-center">
-                    <h6 class="clrd-font">Italian Source Mushroom</h6>
-                    <p class="clrd-font product_price"> <i class="fa fa-usd clrd-font" aria-hidden="true"></i> 12</p>
-                    <a href="#" class="btn btn-primary">Click here</a>
-                </div>
-                <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/8cOtAS9.png">
-                    <div class="zoom"></div>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
-                <img src="http://i.imgur.com/p7OYoBT.png" alt="" />
-                <div class="portfolio_images_overlay text-center">
-                    <h6 class="clrd-font">Italian Source Mushroom</h6>
-                    <p class="clrd-font product_price"> <i class="fa fa-usd clrd-font" aria-hidden="true"></i> 12</p>
-                    <a href="#" class="btn btn-primary">Click here</a>
-                </div>
-                <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/p7OYoBT.png">
-                    <div class="zoom"></div>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
-                <img src="http://i.imgur.com/uZeTibF.png" alt="" />
-                <div class="portfolio_images_overlay text-center">
-                    <h6 class="clrd-font">Italian Source Mushroom</h6>
-                    <p class="clrd-font product_price"> <i class="fa fa-usd clrd-font" aria-hidden="true"></i> 12</p>
-                    <a href="#" class="btn btn-primary">Click here</a>
-                </div>
-                <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/uZeTibF.png">
-                    <div class="zoom"></div>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
-                <img src="http://i.imgur.com/ymwlLln.png" alt="" />
-                <div class="portfolio_images_overlay text-center">
-                    <h6 class="clrd-font">Italian Source Mushroom</h6>
-                    <p class="clrd-font product_price"> <i class="fa fa-usd clrd-font" aria-hidden="true"></i> 12</p>
-                    <a href="#" class="btn btn-primary">Click here</a>
-                </div>
-                <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/ymwlLln.png">
-                    <div class="zoom"></div>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
-                <img src="http://i.imgur.com/PUeaHfC.png" alt="" />
-                <div class="portfolio_images_overlay text-center">
-                    <h6 class="clrd-font">Italian Source Mushroom</h6>
-                    <p class="clrd-font product_price"> <i class="fa fa-usd clrd-font" aria-hidden="true"></i> 12</p>
-                    <a href="#" class="btn btn-primary">Click here</a>
-                </div>
-                <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/PUeaHfC.png">
-                    <div class="zoom"></div>
-                </a>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-12 single_portfolio_text">
-                <img src="http://i.imgur.com/A8FRrbS.png" alt="" />
-                <div class="portfolio_images_overlay text-center">
-                    <h6 class="clrd-font">Italian Source Mushroom</h6>
-                    <p class="clrd-font product_price"> <i class="fa fa-usd clrd-font" aria-hidden="true"></i> 12</p>
-                    <a href="#" class="btn btn-primary">Click here</a>
-                </div>
-                <a class="fancybox" rel="ligthbox" href="http://i.imgur.com/A8FRrbS.png">
-                    <div class="zoom"></div>
-                </a>
-            </div>
+    <!-- <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog"> -->
 
+    <!-- Modal content-->
+    <!-- <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div> -->
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-    <script src="js/script.js"></script>
+    </div>
+    </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+    </script>
 </body>
 
 </html>
