@@ -60,6 +60,8 @@
 
     <!--===============================================================================================-->
 
+    <div id="nyoba"></div>
+
     <section id="dashboard" style="display: none">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -102,7 +104,8 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -111,9 +114,7 @@
         crossorigin="anonymous"></script>
     <script src="js/login.js"></script>
     <script>
-
         $(document).ready(function () {
-
             $('#searchForm').submit(function () {
                 event.preventDefault()
                 const a = document.getElementById('parameter').value
@@ -193,12 +194,21 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                         </div>`
 
                         $('#detailRest').empty()
                         $('#detailRest').append(detail)
+
+                        // function initMap(latitude, longitude) {
+                        //     var place = { lat: latitude, lng: longitude };
+                        //     var map = new google.maps.Map(
+                        //         document.getElementById('mapDisini'), { zoom: 15, center: place });
+                        //     var marker = new google.maps.Marker({ position: place, map: map });
+                        // }
+
+                        // initMap(Number(data.address.latitude), Number(data.address.longitude))
+
 
                         function initMap(latitude, longitude) {
                             var place = { lat: latitude, lng: longitude };
@@ -207,15 +217,13 @@
                             var marker = new google.maps.Marker({ position: place, map: map });
                         }
 
-                        initMap(data.address.latitude, data.address.longitude)
+                        initMap(-6.2389492934, 106.6286404431)
                     })
                     .catch(function (err) {
                         console.log(err)
                     })
             })
         }
-
-
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdv8835rnAxHq2hwdSMLAS1Dt7Mjk2rAo">
     </script>
