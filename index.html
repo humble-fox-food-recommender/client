@@ -110,8 +110,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
     <script src="js/login.js"></script>
     <script>
         $(document).ready(function () {
@@ -120,16 +120,19 @@
                 const a = document.getElementById('parameter').value
 
                 axios({
-                    method: 'get',
-                    url: `http://localhost:3000/zomato/search/${a}/0`
-                })
-                    .then(({ data }) => {
+                        method: 'get',
+                        url: `http://localhost:3000/zomato/search/${a}/0`
+                    })
+                    .then(({
+                        data
+                    }) => {
                         console.log(data);
                         $('#content').empty()
                         let imagesrc = null
                         for (let i = 0; i < data.length; i++) {
                             if (!data[i].restaurant.featured_image) {
-                                imagesrc = "https://www.freeiconspng.com/uploads/no-image-icon-10.png"
+                                imagesrc =
+                                    "https://www.freeiconspng.com/uploads/no-image-icon-10.png"
                             } else {
                                 imagesrc = data[i].restaurant.featured_image
                             }
@@ -156,20 +159,33 @@
 
         function getDetail() {
             $('.restName').click(function (event) {
+                $('#detailRest').empty()
                 console.log('asdlkasjdlkasjd');
                 event.preventDefault()
 
                 const restName = $(this).text()
                 console.log(restName);
                 axios({
-                    method: "GET",
-                    url: `http://localhost:3000/zomato/${restName}`,
-                    headers: { token: localStorage.getItem("token") }
-                })
-                    .then(function ({ data }) {
+                        method: "GET",
+                        url: `http://localhost:3000/zomato/${restName}`,
+                        headers: {
+                            token: localStorage.getItem("token")
+                        }
+                    })
+                    .then(function ({
+                        data
+                    }) {
                         console.log(data);
 
-                        const detail = `
+                        axios({
+                                url: 'http://localhost:3000/currency',
+                                method: 'GET',
+                                header: ''
+                            })
+                            .then((result) => {
+                                let currencyName = result.data
+
+                                const detail = `
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalCenterTitle">${data.name}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -180,9 +196,13 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-6">
-                                        <h5>${data.price} IDR</h5>
-                                        <h6>Price in Forex</h6>
-                                        <p>Any...</p>
+                                        <h5>IDR <span id="priceIDR">${data.price}</span></h5>
+                                        <h6 id="selectCurrency">Price in Forex</h6>
+                                        <select class="" id="currency" name="currency">
+                                            <option selected disabled hidden>Choose currency</option>
+                                        </select>
+                                        <div id="forex">
+                                        </div>
                                     </div>
                                     <div class="col-6" id="google-map">
                                         <p>distance : ${data.distance}</p>
@@ -197,8 +217,42 @@
                             <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                         </div>`
 
-                        $('#detailRest').empty()
-                        $('#detailRest').append(detail)
+                                $('#detailRest').empty()
+                                $('#detailRest').append(detail)
+
+                                $.each(currencyName, function (index, value) {
+                                    $('#currency').append(
+                                        `<option value="${value}">${value}</option>`
+                                    )
+                                })
+
+                                $('#currency').change(function () {
+                                    const price = data.price
+                                    const currency = $('#currency').val()
+                                    event.preventDefault()
+                                    axios({
+                                            url: 'http://localhost:3000/currency',
+                                            method: 'POST',
+                                            data: {
+                                                price: price,
+                                                currency: currency
+                                            }
+                                        })
+                                        .then((result) => {
+                                            console.log(result.data)
+                                            $('#forex').empty()
+                                            $('#forex').append(
+                                                `${currency} ${result.data}`
+                                            )
+                                        }).catch((err) => {
+                                            console.log(err)
+                                        })
+                                })
+
+                            }).catch((err) => {
+                                console.log(err)
+                            })
+
 
                         // function initMap(latitude, longitude) {
                         //     var place = { lat: latitude, lng: longitude };
@@ -211,10 +265,19 @@
 
 
                         function initMap(latitude, longitude) {
-                            var place = { lat: latitude, lng: longitude };
+                            var place = {
+                                lat: latitude,
+                                lng: longitude
+                            };
                             var map = new google.maps.Map(
-                                document.getElementById('mapDisini'), { zoom: 15, center: place });
-                            var marker = new google.maps.Marker({ position: place, map: map });
+                                document.getElementById('mapDisini'), {
+                                    zoom: 15,
+                                    center: place
+                                });
+                            var marker = new google.maps.Marker({
+                                position: place,
+                                map: map
+                            });
                         }
 
                         initMap(-6.2389492934, 106.6286404431)
