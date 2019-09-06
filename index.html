@@ -40,6 +40,7 @@
             <div class="container-login100">
                 <div class="wrap-login100">
                     <form class="login100-form validate-form">
+                        <h1 class="login100-form-title p-b-43"><strong>Food Recommender</strong> </h1>
                         <span class="login100-form-title p-b-43">
                             Login to continue
                         </span>
@@ -111,7 +112,7 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="js/login.js"></script>
     <script>
         $(document).ready(function () {
@@ -134,10 +135,12 @@
                 const a = document.getElementById('parameter').value
 
                 axios({
-                    method: 'get',
-                    url: `http://localhost:3000/zomato/search/${a}/0`,
-                    headers: { token: localStorage.getItem("token") }
-                })
+                        method: 'get',
+                        url: `http://localhost:3000/zomato/search/${a}/0`,
+                        headers: {
+                            token: localStorage.getItem("token")
+                        }
+                    })
                     .then(({
                         data
                     }) => {
@@ -194,18 +197,22 @@
                 const restId = $('.restId').val()
 
                 axios({
-                    method: "GET",
-                    url: `http://localhost:3000/zomato/${$(this).val()}`,
-                    headers: {
-                        token: localStorage.getItem("token")
-                    }
-                })
-                    .then(function ({ data }) {
+                        method: "GET",
+                        url: `http://localhost:3000/zomato/${$(this).val()}`,
+                        headers: {
+                            token: localStorage.getItem("token")
+                        }
+                    })
+                    .then(function ({
+                        data
+                    }) {
                         axios({
-                            url: 'http://localhost:3000/currency',
-                            method: 'GET',
-                            headers: { token: localStorage.getItem("token") }
-                        })
+                                url: 'http://localhost:3000/currency',
+                                method: 'GET',
+                                headers: {
+                                    token: localStorage.getItem("token")
+                                }
+                            })
                             .then((result) => {
                                 $('#detailRest').empty()
 
@@ -261,14 +268,16 @@
                                     const currency = $('#currency').val()
                                     event.preventDefault()
                                     axios({
-                                        url: 'http://localhost:3000/currency',
-                                        method: 'POST',
-                                        data: {
-                                            price: price,
-                                            currency: currency
-                                        },
-                                        headers: { token: localStorage.getItem("token") }
-                                    })
+                                            url: 'http://localhost:3000/currency',
+                                            method: 'POST',
+                                            data: {
+                                                price: price,
+                                                currency: currency
+                                            },
+                                            headers: {
+                                                token: localStorage.getItem("token")
+                                            }
+                                        })
                                         .then((result) => {
                                             $('#forex').empty()
                                             $('#forex').append(
@@ -288,11 +297,21 @@
                     })
             })
         }
+
         function initMap(latitude, longitude) {
-            var place = { lat: latitude, lng: longitude };
+            var place = {
+                lat: latitude,
+                lng: longitude
+            };
             var map = new google.maps.Map(
-                document.getElementById('mapDisini'), { zoom: 15, center: place });
-            var marker = new google.maps.Marker({ position: place, map: map });
+                document.getElementById('mapDisini'), {
+                    zoom: 15,
+                    center: place
+                });
+            var marker = new google.maps.Marker({
+                position: place,
+                map: map
+            });
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdv8835rnAxHq2hwdSMLAS1Dt7Mjk2rAo">
