@@ -157,3 +157,11 @@
 .my-float {
     margin-top: 22px;
 }
+
+#google-map {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    border-top: 50px solid #fff;
+    border-bottom: 20px solid #fff;
+}
