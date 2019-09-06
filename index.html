@@ -69,8 +69,8 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarColor01">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <form class="form-inline my-2 my-lg-0" id="searchForm">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="parameter">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
@@ -82,90 +82,16 @@
         </nav>
 
         <section class="container">
-            <div class="row">
-                <div class="card col-sm-3" style="width: 22rem;">
-                    <img src="https://i.imgur.com/4d97aAb.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's
-                            content.</p>
-                    </div>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-                            data-target="#myModal">Open
-                            Modal</button>
-                    </div>
-                </div>
-                <div class="card col-sm-3" style="width: 22rem;">
-                    <img src="https://i.imgur.com/4d97aAb.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's
-                            content.</p>
-                    </div>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-                            data-target="#myModal">Open
-                            Modal</button>
-                    </div>
-                </div>
-                <div class="card col-sm-3" style="width: 22rem;">
-                    <img src="https://i.imgur.com/4d97aAb.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's
-                            content.</p>
-                    </div>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-                            data-target="#myModal">Open
-                            Modal</button>
-                    </div>
-                </div>
+            <div class="row" id="content">
+
             </div>
         </section>
 
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a class="thumbnail fancybox" rel="ligthbox" href="https://i.imgur.com/4d97aAb.jpg">
-                                        <img class="img-fluid" alt="" src="https://i.imgur.com/4d97aAb.jpg" />
-                                    </a>
-                                    <div class='text-right'>
-                                        <small class='text-muted'>Image Title</small>
-                                    </div> <!-- text-right / end -->
-                                    <h2 class="font-weight-bold">Name</h2>
-                                    <h5>Price IDR</h5>
-                                    <h6>Price in Forex</h6>
-                                    <p>Any...</p>
-                                </div>
-                                <div class="col-6" id="google-map">
-                                    MAP HERE id: #google-map
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                <div class="modal-content" id="detailRest">
+
                 </div>
             </div>
         </div>
@@ -186,6 +112,112 @@
     <script src="js/login.js"></script>
     <script>
 
+        $(document).ready(function () {
+
+            $('#searchForm').submit(function () {
+                event.preventDefault()
+                const a = document.getElementById('parameter').value
+
+                axios({
+                    method: 'get',
+                    url: `http://localhost:3000/zomato/search/${a}/0`
+                })
+                    .then(({ data }) => {
+                        console.log(data);
+                        $('#content').empty()
+                        let imagesrc = null
+                        for (let i = 0; i < data.length; i++) {
+                            if (!data[i].restaurant.featured_image) {
+                                imagesrc = "https://www.freeiconspng.com/uploads/no-image-icon-10.png"
+                            } else {
+                                imagesrc = data[i].restaurant.featured_image
+                            }
+
+                            let template = `<div class="card col-sm-3" style="width: 22rem;">
+                            <img src="${imagesrc}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                               <h5 class="card-title">${data[i].restaurant.name}</h5>
+                               <a href="#" class="restName" data-toggle="modal" data-target="#myModal">${data[i].restaurant.id}</a>
+                            </div>
+                        </div>`
+
+                            $('#content').append(template)
+                        }
+                        console.log('nggli fn');
+                        getDetail()
+
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
+        })
+
+        function getDetail() {
+            $('.restName').click(function (event) {
+                console.log('asdlkasjdlkasjd');
+                event.preventDefault()
+
+                const restName = $(this).text()
+                console.log(restName);
+                axios({
+                    method: "GET",
+                    url: `http://localhost:3000/zomato/${restName}`,
+                    headers: { token: localStorage.getItem("token") }
+                })
+                    .then(function ({ data }) {
+                        console.log(data);
+
+                        const detail = `
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">${data.name}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h5>${data.price} IDR</h5>
+                                        <h6>Price in Forex</h6>
+                                        <p>Any...</p>
+                                    </div>
+                                    <div class="col-6" id="google-map">
+                                        <p>distance : ${data.distance}</p>
+                                        <p>duration : ${data.duration}</p>
+                                        <div id="mapDisini"></div>
+                                        MAP HERE id: #google-map
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>`
+
+                        $('#detailRest').empty()
+                        $('#detailRest').append(detail)
+
+                        function initMap(latitude, longitude) {
+                            var place = { lat: latitude, lng: longitude };
+                            var map = new google.maps.Map(
+                                document.getElementById('mapDisini'), { zoom: 15, center: place });
+                            var marker = new google.maps.Marker({ position: place, map: map });
+                        }
+
+                        initMap(data.address.latitude, data.address.longitude)
+                    })
+                    .catch(function (err) {
+                        console.log(err)
+                    })
+            })
+        }
+
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdv8835rnAxHq2hwdSMLAS1Dt7Mjk2rAo">
     </script>
 </body>
 
