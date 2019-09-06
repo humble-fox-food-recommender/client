@@ -121,7 +121,8 @@
 
                 axios({
                     method: 'get',
-                    url: `http://localhost:3000/zomato/search/${a}/0`
+                    url: `http://localhost:3000/zomato/search/${a}/0`,
+                    headers: { token: localStorage.getItem("token") }
                 })
                     .then(({
                         data
@@ -162,23 +163,18 @@
                 $('#detailRest').empty()
                 event.preventDefault()
 
-                const restId = $('.restId').val()
-                console.log(restId);
                 axios({
                     method: "GET",
-                    url: `http://localhost:3000/zomato/${restId}`,
+                    url: `http://localhost:3000/zomato/${$(this).val()}`,
                     headers: {
                         token: localStorage.getItem("token")
                     }
                 })
-                    .then(function ({
-                        data
-                    }) {
-
+                    .then(function ({ data }) {
                         axios({
                             url: 'http://localhost:3000/currency',
                             method: 'GET',
-                            header: ''
+                            headers: { token: localStorage.getItem("token") }
                         })
                             .then((result) => {
                                 let currencyName = result.data
@@ -206,6 +202,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
+                                                    <p>address  : ${data.address.address}</p>
                                                     <p>distance : ${data.distance}</p>
                                                     <p>duration : ${data.duration}</p>
                                                 </div>
@@ -242,7 +239,8 @@
                                         data: {
                                             price: price,
                                             currency: currency
-                                        }
+                                        },
+                                        headers: { token: localStorage.getItem("token") }
                                     })
                                         .then((result) => {
                                             console.log(result.data)
