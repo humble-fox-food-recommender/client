@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id"
+        content="732491480187-akbg8s50f5qvt50hn3etud4tq9p5oeo9.apps.googleusercontent.com">
     <title>Document</title>
     <link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
     <!--===============================================================================================-->
@@ -43,13 +45,9 @@
                         </span>
 
                         <div class="login100-form-social flex-c-m">
-                            <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                                <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                            </a>
 
-                            <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
+                            <div class="g-signin2" data-onsuccess="onSignIn" style="margin: 0 auto"></div>
+
                         </div>
                     </form>
 
@@ -76,6 +74,11 @@
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" onclick="signOut()">Logout <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
         </nav>
 
         <section class="container">
@@ -175,7 +178,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="js/login.js"></script>
     <script>
 
     </script>
