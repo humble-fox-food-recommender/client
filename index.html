@@ -111,7 +111,7 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="js/login.js"></script>
     <script>
         $(document).ready(function () {
@@ -120,9 +120,9 @@
                 const a = document.getElementById('parameter').value
 
                 axios({
-                        method: 'get',
-                        url: `http://localhost:3000/zomato/search/${a}/0`
-                    })
+                    method: 'get',
+                    url: `http://localhost:3000/zomato/search/${a}/0`
+                })
                     .then(({
                         data
                     }) => {
@@ -147,7 +147,7 @@
 
                             $('#content').append(template)
                         }
-                        console.log('nggli fn');
+
                         getDetail()
 
                     })
@@ -160,62 +160,61 @@
         function getDetail() {
             $('.restName').click(function (event) {
                 $('#detailRest').empty()
-                console.log('asdlkasjdlkasjd');
                 event.preventDefault()
 
                 const restName = $(this).text()
-                console.log(restName);
+                // console.log(restName);
                 axios({
-                        method: "GET",
-                        url: `http://localhost:3000/zomato/${restName}`,
-                        headers: {
-                            token: localStorage.getItem("token")
-                        }
-                    })
+                    method: "GET",
+                    url: `http://localhost:3000/zomato/${restName}`,
+                    headers: {
+                        token: localStorage.getItem("token")
+                    }
+                })
                     .then(function ({
                         data
                     }) {
-                        console.log(data);
 
                         axios({
-                                url: 'http://localhost:3000/currency',
-                                method: 'GET',
-                                header: ''
-                            })
+                            url: 'http://localhost:3000/currency',
+                            method: 'GET',
+                            header: ''
+                        })
                             .then((result) => {
                                 let currencyName = result.data
 
                                 const detail = `
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">${data.name}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <h5>IDR <span id="priceIDR">${data.price}</span></h5>
-                                        <h6 id="selectCurrency">Price in Forex</h6>
-                                        <select class="" id="currency" name="currency">
-                                            <option selected disabled hidden>Choose currency</option>
-                                        </select>
-                                        <div id="forex">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">${data.name}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" >
+                                        <div id="mapDisini" style="height:300px;"></div>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h5>IDR <span id="priceIDR">${data.price}</span></h5>
+                                                    <h6 id="selectCurrency">Price in Forex</h6>
+                                                    <select class="" id="currency" name="currency">
+                                                        <option selected disabled hidden>Choose currency</option>
+                                                    </select>
+                                                    <div id="forex">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <p>distance : ${data.distance}</p>
+                                                    <p>duration : ${data.duration}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-6" id="google-map">
-                                        <p>distance : ${data.distance}</p>
-                                        <p>duration : ${data.duration}</p>
-                                        <div id="mapDisini"></div>
-                                        MAP HERE id: #google-map
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-                        </div>`
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                                    </div>`
 
                                 $('#detailRest').empty()
                                 $('#detailRest').append(detail)
@@ -226,18 +225,25 @@
                                     )
                                 })
 
+                                console.log(data);
+                                console.log(document.getElementById('mapDisini'));
+
+
+
+                                initMap(Number(data.address.latitude), Number(data.address.longitude))
+
                                 $('#currency').change(function () {
                                     const price = data.price
                                     const currency = $('#currency').val()
                                     event.preventDefault()
                                     axios({
-                                            url: 'http://localhost:3000/currency',
-                                            method: 'POST',
-                                            data: {
-                                                price: price,
-                                                currency: currency
-                                            }
-                                        })
+                                        url: 'http://localhost:3000/currency',
+                                        method: 'POST',
+                                        data: {
+                                            price: price,
+                                            currency: currency
+                                        }
+                                    })
                                         .then((result) => {
                                             console.log(result.data)
                                             $('#forex').empty()
@@ -254,38 +260,36 @@
                             })
 
 
+
+
                         // function initMap(latitude, longitude) {
-                        //     var place = { lat: latitude, lng: longitude };
+                        //     var place = {
+                        //         lat: latitude,
+                        //         lng: longitude
+                        //     };
                         //     var map = new google.maps.Map(
-                        //         document.getElementById('mapDisini'), { zoom: 15, center: place });
-                        //     var marker = new google.maps.Marker({ position: place, map: map });
+                        //         document.getElementById('mapDisini'), {
+                        //         zoom: 15,
+                        //         center: place
+                        //     });
+                        //     var marker = new google.maps.Marker({
+                        //         position: place,
+                        //         map: map
+                        //     });
                         // }
 
-                        // initMap(Number(data.address.latitude), Number(data.address.longitude))
-
-
-                        function initMap(latitude, longitude) {
-                            var place = {
-                                lat: latitude,
-                                lng: longitude
-                            };
-                            var map = new google.maps.Map(
-                                document.getElementById('mapDisini'), {
-                                    zoom: 15,
-                                    center: place
-                                });
-                            var marker = new google.maps.Marker({
-                                position: place,
-                                map: map
-                            });
-                        }
-
-                        initMap(-6.2389492934, 106.6286404431)
+                        // initMap(-6.2389492934, 106.6286404431)
                     })
                     .catch(function (err) {
                         console.log(err)
                     })
             })
+        }
+        function initMap(latitude, longitude) {
+            var place = { lat: latitude, lng: longitude };
+            var map = new google.maps.Map(
+                document.getElementById('mapDisini'), { zoom: 15, center: place });
+            var marker = new google.maps.Marker({ position: place, map: map });
         }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdv8835rnAxHq2hwdSMLAS1Dt7Mjk2rAo">
