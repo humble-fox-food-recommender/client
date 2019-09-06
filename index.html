@@ -156,6 +156,10 @@
                             <img src="${imagesrc}" class="card-img-top" alt="...">
                             <div class="card-body">
                                <h5 class="card-title">${data[i].restaurant.name}</h5>
+                               <p>Rating :</p>
+                               <p><span class="fa fa-star checked" style="color: orange;"></span> ${data[i].restaurant.user_rating.aggregate_rating}</p>
+                               <p>${data[i].restaurant.user_rating.rating_text}</p>
+                               
                                <button class="restId btn-success p-2" data-toggle="modal" data-target="#myModal" value="${data[i].restaurant.id}">detail</button>
                             </div>
                         </div>`
