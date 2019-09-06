@@ -141,7 +141,7 @@
                             <img src="${imagesrc}" class="card-img-top" alt="...">
                             <div class="card-body">
                                <h5 class="card-title">${data[i].restaurant.name}</h5>
-                               <a href="#" class="restName" data-toggle="modal" data-target="#myModal">${data[i].restaurant.id}</a>
+                               <button class="restId btn-success p-2" data-toggle="modal" data-target="#myModal" value="${data[i].restaurant.id}">detail</button>
                             </div>
                         </div>`
 
@@ -158,15 +158,15 @@
         })
 
         function getDetail() {
-            $('.restName').click(function (event) {
+            $('.restId').click(function (event) {
                 $('#detailRest').empty()
                 event.preventDefault()
 
-                const restName = $(this).text()
-                // console.log(restName);
+                const restId = $('.restId').val()
+                console.log(restId);
                 axios({
                     method: "GET",
-                    url: `http://localhost:3000/zomato/${restName}`,
+                    url: `http://localhost:3000/zomato/${restId}`,
                     headers: {
                         token: localStorage.getItem("token")
                     }
@@ -258,27 +258,6 @@
                             }).catch((err) => {
                                 console.log(err)
                             })
-
-
-
-
-                        // function initMap(latitude, longitude) {
-                        //     var place = {
-                        //         lat: latitude,
-                        //         lng: longitude
-                        //     };
-                        //     var map = new google.maps.Map(
-                        //         document.getElementById('mapDisini'), {
-                        //         zoom: 15,
-                        //         center: place
-                        //     });
-                        //     var marker = new google.maps.Marker({
-                        //         position: place,
-                        //         map: map
-                        //     });
-                        // }
-
-                        // initMap(-6.2389492934, 106.6286404431)
                     })
                     .catch(function (err) {
                         console.log(err)
