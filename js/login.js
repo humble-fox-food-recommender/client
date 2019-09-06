@@ -84,27 +84,25 @@ function getData() {
 
 function onSignIn(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token
-    $('#login').hide()
-    $('#dashboard').show()
-    // axios({
-    //     url: `http://localhost:3000/users/register`,
-    //     method: `post`,
-    //     data: {
-    //         token: id_token
-    //     },
-    //     headers: { token: localStorage.getItem("token") }
-    // })
-    //     .then(({ data }) => {
-    //         localStorage.setItem("token", data)
-    //         // $('.g-signin2').hide()
-    //         // $('#main').show()
-    //         // $('#signout').show()
-
-    //         // getData()
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
+    console.log('============ Masuk ============ sign in')
+    axios({
+        url: `http://localhost:3000/users/login`,
+        method: `post`,
+        data: {
+            id_token: id_token
+        },
+        headers: { token: localStorage.getItem("token") }
+    })
+        .then(({ data }) => {
+            console.log(data);
+            console.log('============ Masuk ============ token')
+            localStorage.setItem("token", data)
+            $('#login').hide()
+            $('#dashboard').show()
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 function signOut() {
@@ -112,9 +110,6 @@ function signOut() {
     auth2.signOut().then(function () {
         console.log('User signed out.');
         localStorage.removeItem("token")
-        // $('.g-signin2').show()
-        // $('#main').hide()
-        // $('#signout').hide()
         $('#login').show()
         $('#dashboard').hide()
     });
